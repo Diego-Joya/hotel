@@ -19,7 +19,7 @@ class dashboardServices {
         params.start = moment().format('YYYY-MM-DD');
         params.end = moment(params.start, 'YYYY-MM-DD').endOf('day').format('YYYY-MM-DD HH:mm:ss');
       }
-       console.log('params', params);
+      console.log('params', params);
       let data = {};
       params.state = 'pendiente_confirmar';
       const reservasPendientes = await this.getReservasState(params);
@@ -44,6 +44,9 @@ class dashboardServices {
         for (let i = 0; i < consultasCentros.length; i++) {
           const element = consultasCentros[i];
           params.center_id = element.centers_id;
+          params.state = 'pendiente_confirmar';
+          const reservasPendientes = await this.getReservasState(params);
+          element.reservasPendientes = reservasPendientes.pendiente_confirmar;
           params.state = 'reservada';
           const reservasReservadas = await this.getReservasState(params);
           element.reservasReservadas = reservasReservadas.reservada;
