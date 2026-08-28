@@ -26,7 +26,7 @@ class auth_services {
     console.log('token', token);
     await service.Guardartoken(user[0].user_id, token);
 
-    const link = `http://localhost:5173/web/recovery?token=${token}`;
+    const link = `http://localhost:5173/web/new-password?token=${token}`;
 
     const smtpConfig = mailer.getConfigSistema();
     console.log('smtpConfig', smtpConfig);
